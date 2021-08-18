@@ -71,10 +71,9 @@ func getOutput() string {
 	return output
 }
 
-// func GetLogger() bookstoreLogger {
-// 	return log
-// }
-
+func GetLogger() bookstoreLogger {
+	return log
+}
 func (l logger) Printf(format string, v ...interface{}) {
 	if len(v) == 0 {
 		Info(format)
