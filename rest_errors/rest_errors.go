@@ -82,11 +82,20 @@ func NewUnauthorizedError(message string) RestErr {
 	}
 }
 
-func NewRestError(message string) RestErr {
+// func NewRestError(message string) RestErr {
+// 	return restErr{
+// 		message: "Unable to retrieve user information from given access_token",
+// 		status:  http.StatusUnauthorized,
+// 		error:   "unauthorized",
+// 	}
+// }
+
+func NewRestError(message string, status int, err string, causes []interface{}) RestErr {
 	return restErr{
-		message: "Unable to retrieve user information from given access_token",
-		status:  http.StatusUnauthorized,
-		error:   "unauthorized",
+		message: message,
+		status:  status,
+		error:   err,
+		causes:  causes,
 	}
 }
 
