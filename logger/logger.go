@@ -2,10 +2,11 @@ package logger
 
 import (
 	"fmt"
-	"go.uber.org/zap"
-	"go.uber.org/zap/zapcore"
 	"os"
 	"strings"
+
+	"go.uber.org/zap"
+	"go.uber.org/zap/zapcore"
 )
 
 const (
@@ -20,6 +21,8 @@ var (
 type bookstoreLogger interface {
 	Print(v ...interface{})
 	Printf(format string, v ...interface{})
+	Info(msg string, tags ...zap.Field)
+	Error(msg string, err error, tags ...zap.Field)
 }
 
 type logger struct {
@@ -68,9 +71,9 @@ func getOutput() string {
 	return output
 }
 
-func GetLogger() bookstoreLogger {
-	return log
-}
+// func GetLogger() bookstoreLogger {
+// 	return log
+// }
 
 func (l logger) Printf(format string, v ...interface{}) {
 	if len(v) == 0 {
@@ -84,6 +87,10 @@ func (l logger) Print(v ...interface{}) {
 	Info(fmt.Sprintf("%v", v))
 }
 
+// func Info(msg string, tags ...zap.Field) {
+// 	log.log.Info(msg, tags...)
+// 	log.log.Sync()
+// }
 func Info(msg string, tags ...zap.Field) {
 	log.log.Info(msg, tags...)
 	log.log.Sync()
